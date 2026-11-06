@@ -446,6 +446,19 @@ function obj:toggleBluetooth()
   return self:setBluetoothPower(not isPoweredOn)
 end
 
+function obj:checkPermissions()
+  local output, err = self:runBlueutil("-p")
+  if output then
+    return true
+  end
+  if err and err:find("absence of access to Bluetooth AP", 1, true) then
+    hs.alert.show("BluetoothToggle needs Bluetooth permission for Hammerspoon")
+  else
+    hs.alert.show("BluetoothToggle: blueutil failed, see console")
+  end
+  return false
+end
+
 function obj:bindHotkeys(mapping)
   if mapping and mapping.toggle then
     hs.hotkey.bind(mapping.toggle[1], mapping.toggle[2], function()
@@ -511,6 +524,7 @@ function obj:configure(opts)
   end
 
   self:resolveBlueutilPath()
+  self:checkPermissions()
 
   self:start()
   if self.hotkey then

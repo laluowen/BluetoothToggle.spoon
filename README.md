@@ -32,6 +32,8 @@ Bluetooth icons are from [Material Design Icons](https://github.com/Templarian/M
 
 - If menu shows `BT?` and alerts report command failure, check macOS Bluetooth permission for Hammerspoon:
   - System Settings > Privacy & Security > Bluetooth > enable Hammerspoon
+  - Hammerspoon is not listed by default. Click the `+` at the bottom left of the list, pick `/Applications/Hammerspoon.app`, then enable it.
+  - Quit and reopen Hammerspoon after granting.
 
 ## BluetoothToggle:configure
 
