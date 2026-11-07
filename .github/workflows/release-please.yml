@@ -38,12 +38,13 @@ jobs:
         env:
           TAG: ${{ needs.release-please.outputs.tag_name }}
         run: |
-          mkdir -p stage/BluetoothToggle.spoon
-          cp init.lua README.md LICENSE.md CHANGELOG.md bluetooth-on.png bluetooth-off.png bluetooth-unknown.png stage/BluetoothToggle.spoon/
-          (cd stage && zip -r "../BluetoothToggle-${TAG}.zip" BluetoothToggle.spoon)
+          VERSION="${TAG#v}"
+          git archive --format=zip --prefix=BluetoothToggle.spoon/ -o "BluetoothToggle-${VERSION}.zip" HEAD
 
       - name: Upload to release
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ needs.release-please.outputs.tag_name }}
-        run: gh release upload "$TAG" "BluetoothToggle-${TAG}.zip" --clobber
+        run: |
+          VERSION="${TAG#v}"
+          gh release upload "$TAG" "BluetoothToggle-${VERSION}.zip" --clobber
