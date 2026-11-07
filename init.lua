@@ -58,7 +58,7 @@ obj.__index = obj
 obj.logger = hs.logger.new("BluetoothToggle", "info")
 
 obj.name = "BluetoothToggle"
-obj.version = "1.1.0" -- x-release-please-version
+obj.version = "1.2.0" -- x-release-please-version
 obj.author = "laluowen"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
 obj.homepage = "https://github.com/laluowen/BluetoothToggle.spoon"
